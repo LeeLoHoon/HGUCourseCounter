@@ -1,6 +1,7 @@
 package edu.handong.analysis.utils;
 
 import java.util.ArrayList;
+import java.io.*;
 
 public class Utils {
 	
@@ -8,6 +9,21 @@ public class Utils {
 	public static ArrayList<String> getLines(String file,boolean removeHeader){
 	//주어진 file path로 csv 파일 읽어서 ArrayList<String> 객체 리턴 즉, 각 원소가 line string	
 	//두번째 arg는 true 인 경우 첫라인 포함 x (첫라인은 목록이기 때문)
+		BufferedReader br = null;
+		try{
+			br=new BufferedReader(new FileReader(file));
+			String line=null;
+			while((line=br.readLine())!=null) {
+				System.out.println(line);
+			}
+		}catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}finally {
+			try {
+				if(br!=null)
+					br.close();
+			}catch (Exception e) {}
+		}
 		return null;
 	}
 	public static void writeAFile(ArrayList<String> lines, String targetFileName) {
