@@ -36,8 +36,11 @@ public class Utils {
 		
 		try {
 			writer = new FileWriter(file,true);
-			writer.write("hi");
+			for(String l:lines) {
+			writer.write(l);
+			writer.write("\n");
 			writer.flush();
+			}
 		}catch(IOException e) {
 		}finally {
 			try {

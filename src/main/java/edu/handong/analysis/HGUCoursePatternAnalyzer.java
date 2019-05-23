@@ -119,7 +119,7 @@ public class HGUCoursePatternAnalyzer {
 				//해야할일: getNumCourseInNthSementer method 완성
 				b=Id+", "+String.valueOf(q)+", "+String.valueOf(k)+", "+String.valueOf(a);
 				result.add(b);
-				System.out.println(b);
+				//System.out.println(b);
 			}
 			
 		
@@ -127,6 +127,6 @@ public class HGUCoursePatternAnalyzer {
 		}
 		// TODO: Implement this method
 		
-		return null; // do not forget to return a proper variable.
+		return result; // do not forget to return a proper variable.
 	}
 }
