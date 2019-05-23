@@ -26,14 +26,12 @@ public class Student {
 		Course e =w.get(q-1);
 		a=e.getYearTaken();
 		b=e.getSemesterCourseTaken();
-		//String numStr2 = String.valueOf(numInt);
 		c=String.valueOf(a)+"-"+String.valueOf(b);
 		if(semestersByYearAndSemester.containsKey(c))
 			go=1;
 		else {
 			check=semestersByYearAndSemester.size();
-			semestersByYearAndSemester.put(c,check+1);
-			//System.out.println(semestersByYearAndSemester.get(c));
+	
 		}
 		return semestersByYearAndSemester;
 		
@@ -51,11 +49,8 @@ public class Student {
 			}
 			
 		}
-		//semestersByYearAndSemester에서 value값이 semester 
-		//이고 semester 값이 들어오면 해당 년도 return하고 그년도에 들은 coure갯수 세기
+
 		
 		return c;
 	}
-
-	//field에 대한 getter setter는 필요하면 추가
 }
