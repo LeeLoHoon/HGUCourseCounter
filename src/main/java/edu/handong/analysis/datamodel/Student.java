@@ -33,16 +33,28 @@ public class Student {
 		else {
 			check=semestersByYearAndSemester.size();
 			semestersByYearAndSemester.put(c,check+1);
-			System.out.println(semestersByYearAndSemester.get(c));
+			//System.out.println(semestersByYearAndSemester.get(c));
 		}
 		return semestersByYearAndSemester;
 		
 	}
 	public int getNumCourseInNthSementer(int semester) {
+		int a,b,c=0;
+		String d;
+		
+		for(Course h:coursesTaken) {
+			a=h.getYearTaken();
+			b=h.getSemesterCourseTaken();
+			d=String.valueOf(a)+"-"+String.valueOf(b);
+			if(semestersByYearAndSemester.get(d)==semester) {
+				c++;
+			}
+			
+		}
 		//semestersByYearAndSemester에서 value값이 semester 
 		//이고 semester 값이 들어오면 해당 년도 return하고 그년도에 들은 coure갯수 세기
 		
-		return 1;
+		return c;
 	}
 
 	//field에 대한 getter setter는 필요하면 추가
