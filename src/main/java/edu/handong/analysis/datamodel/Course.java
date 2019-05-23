@@ -29,7 +29,7 @@ public class Course {
 		courseCredit=element.get(6);
 		yearTaken=Integer.parseInt(element.get(7));
 		semesterCourseTaken=Integer.parseInt(element.get(8));
-
+		//constructor(line을 받아 split 해서 field 초기화 
 	}
 	public int getYearTaken() {
 		int year=yearTaken;
@@ -39,5 +39,5 @@ public class Course {
 		int semesterCourse=semesterCourseTaken;
 		return semesterCourse;
 	}
-
+	//setter,getter 필요하면 정의
 }

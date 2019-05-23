@@ -7,6 +7,8 @@ public class Utils {
 	
 	
 	public static ArrayList<String> getLines(String file,boolean removeHeader){
+	//주어진 file path로 csv 파일 읽어서 ArrayList<String> 객체 리턴 즉, 각 원소가 line string	
+	//두번째 arg는 true 인 경우 첫라인 포함 x (첫라인은 목록이기 때문)
 		BufferedReader br = null;
 		ArrayList<String> startArray = new ArrayList(); 
 		try{

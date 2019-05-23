@@ -1,9 +1,11 @@
 package edu.handong.analysis;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Collections;
 
 
 import edu.handong.analysis.datamodel.Course;
@@ -103,16 +105,21 @@ public class HGUCoursePatternAnalyzer {
 		result.add(sen);
 		for (String Id: sortedStudents.keySet()) {
 			//TotalNumberOfSemestersRegistered
+			//semester= (ArrayList<Integer>) 
 			f=sortedStudents.get(Id).getSemestersByYearAndSemester().values().size();
-			
-			
+			//해야할일: semester 오름차순 sorting
+			//Collections.sort(semester);
 
 			for(int k=1;k<f+1;k++) {
 				
 				q=sortedStudents.get(Id).getSemestersByYearAndSemester().size();
+				//System.out.println(q);
+				//System.out.println(k);
 				a=sortedStudents.get(Id).getNumCourseInNthSementer(k);
+				//해야할일: getNumCourseInNthSementer method 완성
 				b=Id+", "+String.valueOf(q)+", "+String.valueOf(k)+", "+String.valueOf(a);
 				result.add(b);
+				//System.out.println(b);
 			}
 			
 		
