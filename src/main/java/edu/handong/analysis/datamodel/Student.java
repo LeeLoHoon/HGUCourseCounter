@@ -46,7 +46,7 @@ public class Student {
 			year = course.getYearTaken();
 			semesterCourse = course.getSemesterCourseTaken();
 			yearToSemester = String.valueOf(year) + "-" + String.valueOf(semesterCourse);
-			if (semestersByYearAndSemester.get(yearToSemester) == semesterCourse) {
+			if (semestersByYearAndSemester.get(yearToSemester) == semester) {
 				NumCourseInNthSementer++;
 			}
 		}
