@@ -19,9 +19,10 @@ public class Utils {
 					removeHeader=false;
 				else
 					startArray.add(line);
-			}
+			}	
 		}catch(IOException ioe) {
-			System.out.println(ioe.getMessage());
+			System.out.println("The file path does not exist. Please check your CLI argument!");
+			System.exit(0);
 		}finally {
 			try {
 				if(br!=null)
@@ -32,8 +33,9 @@ public class Utils {
 	}
 	public static void writeAFile(ArrayList<String> lines, String targetFileName) {
 		File file = new File(targetFileName);
+		File directory = new File(file.getParentFile().getAbsolutePath());
+		directory.mkdirs();
 		FileWriter writer = null;
-		
 		try {
 			writer = new FileWriter(file,true);
 			for(String l:lines) {
@@ -41,11 +43,11 @@ public class Utils {
 			writer.write("\n");
 			writer.flush();
 			}
-		}catch(IOException e) {
+		}catch(IOException ioe) {
 		}finally {
 			try {
 				if(writer !=null) writer.close();
-			}catch(IOException e) {}	
+			}catch(Exception e) {}	
 		}
 	//파라미터로 받은 ArrayList를 targetFileName 파일에 저장
     //(이때, path중 존재하지 않는 디렉터리있으면 FileNotFoundException 발생하는데 directory 자동 생성 논리필요)

@@ -27,7 +27,7 @@ public class HGUCoursePatternAnalyzer {
 		try {
 			// when there are not enough arguments from CLI, it throws the NotEnoughArgmentException which must be defined by you.
 			if(args.length<2)
-				throw new NotEnoughArgumentException();
+				throw new NotEnoughArgumentException("No CLI argument Exception! Please put a file path.");
 		} catch (NotEnoughArgumentException e) {
 			System.out.println(e.getMessage());
 			System.exit(0);
