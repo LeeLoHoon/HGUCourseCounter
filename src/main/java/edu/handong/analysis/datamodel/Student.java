@@ -20,36 +20,36 @@ public class Student {
 	}
 
 	public HashMap<String, Integer> getSemestersByYearAndSemester() {
-		int a, b, q, check, go;
-		String c;
-		q = coursesTaken.size();
-		ArrayList<Course> w = (ArrayList<Course>) coursesTaken.clone();
-		Course e = w.get(q - 1);
-		a = e.getYearTaken();
-		b = e.getSemesterCourseTaken();
-		c = String.valueOf(a) + "-" + String.valueOf(b);
-		if (semestersByYearAndSemester.containsKey(c))
+		int year, semester, numOfCourse, check, go;
+		String yearToSemester;
+		numOfCourse = coursesTaken.size();
+		ArrayList<Course> cloneCourses = (ArrayList<Course>) coursesTaken.clone();
+		Course selectedCourse = cloneCourses.get(numOfCourse - 1);
+		year = selectedCourse.getYearTaken();
+		semester = selectedCourse.getSemesterCourseTaken();
+		yearToSemester = String.valueOf(year) + "-" + String.valueOf(semester);
+		if (semestersByYearAndSemester.containsKey(yearToSemester))
 			go = 1;
 		else {
 			check = semestersByYearAndSemester.size();
-			semestersByYearAndSemester.put(c, check + 1);
+			semestersByYearAndSemester.put(yearToSemester, check + 1);
 		}
 		return semestersByYearAndSemester;
 
 	}
 
 	public int getNumCourseInNthSementer(int semester) {
-		int a, b, c = 0;
-		String d;
+		int year, semesterCourse, NumCourseInNthSementer = 0;
+		String yearToSemester;
 
-		for (Course h : coursesTaken) {
-			a = h.getYearTaken();
-			b = h.getSemesterCourseTaken();
-			d = String.valueOf(a) + "-" + String.valueOf(b);
-			if (semestersByYearAndSemester.get(d) == semester) {
-				c++;
+		for (Course course : coursesTaken) {
+			year = course.getYearTaken();
+			semesterCourse = course.getSemesterCourseTaken();
+			yearToSemester = String.valueOf(year) + "-" + String.valueOf(semesterCourse);
+			if (semestersByYearAndSemester.get(yearToSemester) == semesterCourse) {
+				NumCourseInNthSementer++;
 			}
 		}
-		return c;
+		return NumCourseInNthSementer;
 	}
 }
