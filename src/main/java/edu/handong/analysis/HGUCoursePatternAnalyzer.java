@@ -66,11 +66,15 @@ public class HGUCoursePatternAnalyzer {
 					HashMap<String,Integer> studentNumByYearToSemester = countAllStudents(lines);
 					HashMap<String,Integer> choiceStudentNumByYearToSemester = countListenStudents(courseCode,lines);
 					Map<String, Integer> sortedChoiceStudentNumByYearToSemester = new TreeMap<String, Integer>(choiceStudentNumByYearToSemester);
+					ArrayList<String> finalLines = new ArrayList<String>();
 					for(String yearWithSemester : sortedChoiceStudentNumByYearToSemester.keySet()) {
 						String a=yearWithSemester.substring(0,5);
 						String b=yearWithSemester.substring(6,7);
-						String finalLine = a+", "+b+", "+ 
+						String finalLine = a+", "+b+", "+ courseName + ", "+ sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
+						finalLines.add(finalLine);
 					}
+					Utils.writeAFile(finalLines, outputPath);
+					
 					
 					//-a 2 구현
 					
@@ -80,13 +84,14 @@ public class HGUCoursePatternAnalyzer {
 
 		}
 	}
-	private findCourseName(String code,ArrayList<String[]> lines) {
+	private String findCourseName(String code,ArrayList<String[]> lines) {
 		for (String[] line : lines) {
 			if(code.equals(line[4])) {
 				return line[5];
 			}
 			
 		}
+		return null;
 	}
 	private HashMap<String, Integer> countAllStudents(ArrayList<String[]> checkLines){
 		HashMap<String, Integer> numberOfStudents = new HashMap<String, Integer>();
