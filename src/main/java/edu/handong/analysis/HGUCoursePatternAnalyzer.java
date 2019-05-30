@@ -9,7 +9,7 @@ import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
 import edu.handong.analysis.utils.NotEnoughArgumentException;
 import edu.handong.analysis.utils.Utils;
-
+import au.com.bytecode.opencsv.CSVReader;
 public class HGUCoursePatternAnalyzer {
 
 	private HashMap<String, Student> students;
@@ -26,10 +26,12 @@ public class HGUCoursePatternAnalyzer {
 
 		String dataPath = args[0];
 		String resultPath = args[1];
-		ArrayList<String> lines = Utils.getLines(dataPath, true);
-		//open csv를 사용해서 trim 안쓰고깔끔하게 읽
+		ArrayList<String[]> lines = Utils.getLines(dataPath, true);
+		//open csv를 사용해서 trim 안쓰고깔끔하게 읽기
+		
 		students = loadStudentCourseRecords(lines);
-
+		//lines
+		
 		Map<String, Student> sortedStudents = new TreeMap<String, Student>(students);
 
 		ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
@@ -37,24 +39,22 @@ public class HGUCoursePatternAnalyzer {
 		Utils.writeAFile(linesToBeSaved, resultPath);
 	}
 
-	private HashMap<String, Student> loadStudentCourseRecords(ArrayList<String> lines) {
-		String trimLine = null;
+	private HashMap<String, Student> loadStudentCourseRecords(ArrayList<String[]> lines) {
 		HashMap<String, Student> makeStudents = new HashMap<String, Student>();
 
-		for (String line : lines) {
-			trimLine = line.trim().split(", ")[0];
-
-			if (makeStudents.containsKey(trimLine)) {
+		for (String[] line : lines) {
+			
+			if (makeStudents.containsKey(line[0])) {
 				Course newCourse = new Course(line);
-				makeStudents.get(trimLine).addCourse(newCourse);
-				makeStudents.get(trimLine).getSemestersByYearAndSemester();
+				makeStudents.get(line[0]).addCourse(newCourse);
+				makeStudents.get(line[0]).getSemestersByYearAndSemester();
 
 			} else {
-				Student newStudent = new Student(trimLine);
+				Student newStudent = new Student(line[0]);
 				Course newCourse = new Course(line);
 				newStudent.addCourse(newCourse);
 				newStudent.getSemestersByYearAndSemester();
-				makeStudents.put(trimLine, newStudent);
+				makeStudents.put(line[0], newStudent);
 			}
 		}
 		return makeStudents; 

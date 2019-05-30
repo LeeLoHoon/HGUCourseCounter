@@ -13,11 +13,11 @@ public class Course {
 	private int yearTaken;
 	private int semesterCourseTaken;
 
-	public Course(String line) {
+	public Course(String[] line) {
 
 		ArrayList<String> element = new ArrayList<String>();
-		String[] s = line.trim().split(", ");
-		for (String t : s) {
+		//String[] s = line.trim().split(", ");
+		for (String t : line) {
 			element.add(t);
 		}
 		studentld = element.get(0);
@@ -27,8 +27,8 @@ public class Course {
 		courseCode = element.get(4);
 		courseName = element.get(5);
 		courseCredit = element.get(6);
-		yearTaken = Integer.parseInt(element.get(7));
-		semesterCourseTaken = Integer.parseInt(element.get(8));
+		yearTaken = Integer.parseInt(element.get(7).trim());
+		semesterCourseTaken = Integer.parseInt(element.get(8).trim());
 	}
 
 	public int getYearTaken() {

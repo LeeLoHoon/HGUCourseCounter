@@ -2,21 +2,21 @@ package edu.handong.analysis.utils;
 
 import java.util.ArrayList;
 import java.io.*;
+import au.com.bytecode.opencsv.CSVReader;
 
 public class Utils {
 
-	public static ArrayList<String> getLines(String file, boolean removeHeader) {
+	public static ArrayList<String[]> getLines(String file, boolean removeHeader) {
 		BufferedReader br = null;
-		ArrayList<String> startArray = new ArrayList();
+		ArrayList<String[]> startArray = new ArrayList();
 		try {
-			//CSVReader reader= 
-			br = new BufferedReader(new FileReader(file));
-			String line = null;
-			while ((line = br.readLine()) != null) {
+			CSVReader reader= new CSVReader(new FileReader(file));
+			String nextLine[] = null;
+			while((nextLine=reader.readNext())!=null){
 				if (removeHeader == true)
 					removeHeader = false;
 				else
-					startArray.add(line);
+					startArray.add(nextLine);
 			}
 		} catch (IOException ioe) {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
