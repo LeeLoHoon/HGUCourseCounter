@@ -12,10 +12,18 @@ public class Utils {
 			CSVReader reader= new CSVReader(new FileReader(file));
 			String nextLine[] = null;
 			while((nextLine=reader.readNext())!=null){
+				int i =0;
 				if (removeHeader == true)
 					removeHeader = false;
-				else if(Integer.parseInt(nextLine[7].trim())>=start && Integer.parseInt(nextLine[7].trim())<=end)
+				else if(Integer.parseInt(nextLine[7].trim())>=start && Integer.parseInt(nextLine[7].trim())<=end) {
+					/*while(nextLine[i]!=null) {
+						nextLine[i]=nextLine[i].trim();
+						System.out.println(nextLine[i]);
+						i++;
+					}*/
+					System.out.println(nextLine[1]);
 					startArray.add(nextLine);
+				}
 			}
 		} catch (IOException ioe) {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
