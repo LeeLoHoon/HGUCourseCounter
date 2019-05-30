@@ -63,14 +63,16 @@ public class HGUCoursePatternAnalyzer {
 					
 					ArrayList<String[]> lines = Utils.getLines(inputPath,startYear,endYear,true);
 					String courseName = findCourseName(courseCode,lines);
+					//System.out.println(courseCode);
 					HashMap<String,Integer> studentNumByYearToSemester = countAllStudents(lines);
 					HashMap<String,Integer> choiceStudentNumByYearToSemester = countListenStudents(courseCode,lines);
 					Map<String, Integer> sortedChoiceStudentNumByYearToSemester = new TreeMap<String, Integer>(choiceStudentNumByYearToSemester);
 					ArrayList<String> finalLines = new ArrayList<String>();
 					for(String yearWithSemester : sortedChoiceStudentNumByYearToSemester.keySet()) {
-						String a=yearWithSemester.substring(0,5);
-						String b=yearWithSemester.substring(6,7);
+						String a=yearWithSemester.substring(0,4);
+						String b=yearWithSemester.substring(5,6);
 						String finalLine = a+", "+b+", "+ courseName + ", "+ sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
+						System.out.println(finalLine);
 						finalLines.add(finalLine);
 					}
 					Utils.writeAFile(finalLines, outputPath);
@@ -86,8 +88,10 @@ public class HGUCoursePatternAnalyzer {
 	}
 	private String findCourseName(String code,ArrayList<String[]> lines) {
 		for (String[] line : lines) {
-			if(code.equals(line[4])) {
-				return line[5];
+			//System.out.println(line[4].trim());
+			String it = line[4].trim();
+			if(code.equals(it)) {
+				return line[5].trim();
 			}
 			
 		}
@@ -103,7 +107,7 @@ public class HGUCoursePatternAnalyzer {
 			String yearToSemester = year +"-"+ semester;
 			if(numberOfStudents.containsKey(yearToSemester)){
 				if(studentName.contains(line[0])) {
-					System.out.println("go");
+					//System.out.println("go");
 				}
 				else {
 					studentName.add(line[0]);
@@ -124,7 +128,9 @@ public class HGUCoursePatternAnalyzer {
 		HashMap<String, Integer> choiceNumberOfStudents = new HashMap<String, Integer>();
 		int count=1;
 		for (String[] line : checkLines) {
-			if(line[4].equals(code)) {
+			String it = line[4].trim();
+			if(it.equals(code)) {
+				System.out.println("no");
 				String year=line[7].trim();
 				String semester=line[8].trim();
 				String yearToSemester = year +"-"+ semester;
@@ -188,11 +194,11 @@ public class HGUCoursePatternAnalyzer {
 
 			CommandLine cmd = parser.parse(options, args);
 
-			inputPath = cmd.getOptionValue("i");
-			outputPath = cmd.getOptionValue("o"); 
+			inputPath = cmd.getOptionValue("i").trim();
+			outputPath = cmd.getOptionValue("o").trim(); 
 			analysisOption = Integer.parseInt(cmd.getOptionValue("a"));
 			if(analysisOption==2) {
-				courseCode=cmd.getOptionValue("c");
+				courseCode=cmd.getOptionValue("c").trim();
 			}
 			
 			startYear = Integer.parseInt(cmd.getOptionValue("s"));
