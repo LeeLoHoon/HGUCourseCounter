@@ -6,8 +6,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class Utils {
 
-	public static ArrayList<String[]> getLines(String file, boolean removeHeader) {
-		BufferedReader br = null;
+	public static ArrayList<String[]> getLines(String file,int start, int end, boolean removeHeader) {
 		ArrayList<String[]> startArray = new ArrayList();
 		try {
 			CSVReader reader= new CSVReader(new FileReader(file));
@@ -15,19 +14,14 @@ public class Utils {
 			while((nextLine=reader.readNext())!=null){
 				if (removeHeader == true)
 					removeHeader = false;
-				else
+				else if(Integer.parseInt(nextLine[7].trim())>=start && Integer.parseInt(nextLine[7].trim())<=end)
 					startArray.add(nextLine);
 			}
 		} catch (IOException ioe) {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
 			System.exit(0);
-		} finally {
-			try {
-				if (br != null)
-					br.close();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			}
-		}
 		return startArray;
 	}
 
