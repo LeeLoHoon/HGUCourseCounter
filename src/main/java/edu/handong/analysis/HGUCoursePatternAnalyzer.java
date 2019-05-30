@@ -27,7 +27,7 @@ public class HGUCoursePatternAnalyzer {
 		String dataPath = args[0];
 		String resultPath = args[1];
 		ArrayList<String> lines = Utils.getLines(dataPath, true);
-
+		//open csv를 사용해서 trim 안쓰고깔끔하게 읽
 		students = loadStudentCourseRecords(lines);
 
 		Map<String, Student> sortedStudents = new TreeMap<String, Student>(students);

@@ -9,6 +9,7 @@ public class Utils {
 		BufferedReader br = null;
 		ArrayList<String> startArray = new ArrayList();
 		try {
+			//CSVReader reader= 
 			br = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = br.readLine()) != null) {
