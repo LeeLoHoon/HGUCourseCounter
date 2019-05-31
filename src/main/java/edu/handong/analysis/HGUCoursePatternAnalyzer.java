@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.math.*;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
@@ -75,11 +76,11 @@ public class HGUCoursePatternAnalyzer {
 						String b=yearWithSemester.substring(5,6);
 						float c=  studentNumByYearToSemester.get(yearWithSemester).size();
 						float d=  sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
-						float e = (d/c)*100;
+						float e = Math.round(((d/c)*1000))/10F;
 						System.out.println(c);
 						System.out.println(d);
 						System.out.println(e);
-						String finalLine = a+", "+b+", "+ courseName+", " +courseCode+ ", "+ studentNumByYearToSemester.get(yearWithSemester).size()+", "+sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
+						String finalLine = a+", "+b+", "+ courseName+", " +courseCode+ ", "+ studentNumByYearToSemester.get(yearWithSemester).size()+", "+sortedChoiceStudentNumByYearToSemester.get(yearWithSemester)+", "+e;
 						//System.out.println(finalLine);
 						finalLines.add(finalLine);
 					}
@@ -303,9 +304,9 @@ public class HGUCoursePatternAnalyzer {
 	private void printHelp(Options options) {
 		// automatically generate the help statement
 		HelpFormatter formatter = new HelpFormatter();
-		String header = "CLI test program";
-		String footer ="\nPlease report issues at https://github.com/lifove/CLIExample/issues";
-		formatter.printHelp("CLIExample", header, options, footer, true);
+		String header = "HGU Course Analyzer";
+		String footer ="";
+		formatter.printHelp("HGU Course Analyzer", header, options, footer, true);
 	}
 
 }
