@@ -18,7 +18,6 @@ public class Utils {
 					for(int i=0;i<9;i++) {
 						nextLine[i]=nextLine[i].trim();
 					}
-					//System.out.println(nextLine[1]);
 					startArray.add(nextLine);
 				}
 			}

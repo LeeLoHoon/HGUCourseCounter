@@ -16,7 +16,6 @@ public class Course {
 	public Course(String[] line) {
 
 		ArrayList<String> element = new ArrayList<String>();
-		//String[] s = line.trim().split(", ");
 		for (String t : line) {
 			element.add(t);
 		}
