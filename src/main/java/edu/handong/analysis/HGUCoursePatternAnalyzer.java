@@ -18,13 +18,13 @@ import org.apache.commons.cli.Options;
 public class HGUCoursePatternAnalyzer {
 
 	private HashMap<String, Student> students;
-	String inputPath;
-	String outputPath;
+	private String inputPath;
+	private String outputPath;
 	String courseCode;
-	int analysisOption;
-	int startYear;
-	int endYear;
-	boolean help;
+	private int analysisOption;
+	private int startYear;
+	private int endYear;
+	private boolean help;
 
 	public void run(String[] args) {
 		Options options = createOptions();
