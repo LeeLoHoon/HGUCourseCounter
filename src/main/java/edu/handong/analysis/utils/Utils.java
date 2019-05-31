@@ -12,16 +12,13 @@ public class Utils {
 			CSVReader reader= new CSVReader(new FileReader(file));
 			String nextLine[] = null;
 			while((nextLine=reader.readNext())!=null){
-				int i =0;
 				if (removeHeader == true)
 					removeHeader = false;
 				else if(Integer.parseInt(nextLine[7].trim())>=start && Integer.parseInt(nextLine[7].trim())<=end) {
-					/*while(nextLine[i]!=null) {
+					for(int i=0;i<9;i++) {
 						nextLine[i]=nextLine[i].trim();
-						System.out.println(nextLine[i]);
-						i++;
-					}*/
-					System.out.println(nextLine[1]);
+					}
+					//System.out.println(nextLine[1]);
 					startArray.add(nextLine);
 				}
 			}

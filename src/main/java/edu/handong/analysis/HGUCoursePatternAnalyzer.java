@@ -64,7 +64,7 @@ public class HGUCoursePatternAnalyzer {
 					ArrayList<String[]> lines = Utils.getLines(inputPath,startYear,endYear,true);
 					String courseName = findCourseName(courseCode,lines);
 					//System.out.println(courseCode);
-					HashMap<String,Integer> studentNumByYearToSemester = countAllStudents(lines);
+					HashMap<String,ArrayList<String>> studentNumByYearToSemester = countAllStudents(lines);
 					HashMap<String,Integer> choiceStudentNumByYearToSemester = countListenStudents(courseCode,lines);
 					Map<String, Integer> sortedChoiceStudentNumByYearToSemester = new TreeMap<String, Integer>(choiceStudentNumByYearToSemester);
 					ArrayList<String> finalLines = new ArrayList<String>();
@@ -73,7 +73,13 @@ public class HGUCoursePatternAnalyzer {
 					for(String yearWithSemester : sortedChoiceStudentNumByYearToSemester.keySet()) {
 						String a=yearWithSemester.substring(0,4);
 						String b=yearWithSemester.substring(5,6);
-						String finalLine = a+", "+b+", "+ courseName+", " +courseCode+ ", "+ studentNumByYearToSemester.get(yearWithSemester)+", "+sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
+						float c=  studentNumByYearToSemester.get(yearWithSemester).size();
+						float d=  sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
+						float e = (d/c)*100;
+						System.out.println(c);
+						System.out.println(d);
+						System.out.println(e);
+						String finalLine = a+", "+b+", "+ courseName+", " +courseCode+ ", "+ studentNumByYearToSemester.get(yearWithSemester).size()+", "+sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
 						//System.out.println(finalLine);
 						finalLines.add(finalLine);
 					}
@@ -98,31 +104,57 @@ public class HGUCoursePatternAnalyzer {
 		}
 		return null;
 	}
-	private HashMap<String, Integer> countAllStudents(ArrayList<String[]> checkLines){
-		HashMap<String, Integer> numberOfStudents = new HashMap<String, Integer>();
+	private HashMap<String, ArrayList<String>> countAllStudents(ArrayList<String[]> checkLines){
+		HashMap<String,ArrayList<String>> numberOfStudents = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> studentName = new ArrayList<String>();
+		boolean check ;
 		int count=1;
 		for (String[] line : checkLines) {
 			String year=line[7];
 			String semester=line[8];
 			String yearToSemester = year +"-"+ semester;
+			//학생이 같으면 count 안함 
+			//System.out.println(yearToSemester);
 			if(numberOfStudents.containsKey(yearToSemester)){
 				if(studentName.contains(line[0])) {
-					//System.out.println("go");
+					//System.out.println(line[0]);
+					//문제점은2004-2학기가 numberOfStudents에 포함 되어있고 학생도 포함되어 있지만 이학기에 이학생을 안셈. 
+					if(numberOfStudents.get(yearToSemester).contains(line[0])){
+						
+					}
+					else {
+						numberOfStudents.get(yearToSemester).add(line[0]);	
+					}
+					//System.out.println(numberOfStudents.get(yearToSemester));
 				}
 				else {
+					//System.out.println(line[0]+"+");
 					studentName.add(line[0]);
-					numberOfStudents.put(yearToSemester,numberOfStudents.get(yearToSemester)+1);
+					numberOfStudents.get(yearToSemester).add(line[0]);	
+					//System.out.println(numberOfStudents.get(yearToSemester));
 					
 				}
 			}
 			else {
-				studentName.add(line[0]);
-				numberOfStudents.put(yearToSemester,count);		
+				if(studentName.contains(line[0])) {
+					//System.out.println(line[0]+"*");
+					ArrayList<String> New = new ArrayList<String>();
+					numberOfStudents.put(yearToSemester,New);	
+					numberOfStudents.get(yearToSemester).add(line[0]);
+					//System.out.println(numberOfStudents.get(yearToSemester));
+				}
+				else {
+					//System.out.println(line[0]+"-");
+					studentName.add(line[0]);
+					ArrayList<String> New = new ArrayList<String>();
+					numberOfStudents.put(yearToSemester,New);	
+					numberOfStudents.get(yearToSemester).add(line[0]);
+					//System.out.println(numberOfStudents.get(yearToSemester));
+				}
 			}
-			
-			
+			//System.out.println(numberOfStudents.get(yearToSemester));
 		}
+		//System.out.println(numberOfStudents.get("2008-1"));
 		return numberOfStudents;
 	}
 	private HashMap<String, Integer> countListenStudents(String code, ArrayList<String[]> checkLines){
@@ -131,7 +163,7 @@ public class HGUCoursePatternAnalyzer {
 		for (String[] line : checkLines) {
 			//System.out.println(line[4]);
 			if(line[4].equals(code)) {
-				System.out.println("no");
+				//System.out.println("no");
 				String year=line[7];
 				String semester=line[8];
 				String yearToSemester = year +"-"+ semester;
