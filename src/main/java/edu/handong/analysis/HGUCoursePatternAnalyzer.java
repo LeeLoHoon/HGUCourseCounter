@@ -52,7 +52,7 @@ public class HGUCoursePatternAnalyzer {
 					Map<String, Integer> sortedChoiceStudentNumByYearToSemester = new TreeMap<String, Integer>(
 							choiceStudentNumByYearToSemester);
 					ArrayList<String> finalLines = new ArrayList<String>();
-					String sen = "Year, Semester, CourseCode, CourseName, TotalStudents, StudentsTaken, Rate";
+					String sen = "Year,Semester,CourseCode,CourseName,TotalStudents,StudentsTaken,Rate";
 					finalLines.add(sen);
 					for (String yearWithSemester : sortedChoiceStudentNumByYearToSemester.keySet()) {
 						String year = yearWithSemester.substring(0, 4);
@@ -60,7 +60,7 @@ public class HGUCoursePatternAnalyzer {
 						float entire = studentNumByYearToSemester.get(yearWithSemester).size();
 						float select = sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
 						float rate = Math.round(((select / entire) * 1000)) / 10F;
-						String finalLine = year + ", " + semester + ", " +courseCode + ", " +courseName + ", " 
+						String finalLine = year + ", " + semester + ", " +courseCode + "," +courseName + ", " 
 								+ studentNumByYearToSemester.get(yearWithSemester).size() + ", "
 								+ sortedChoiceStudentNumByYearToSemester.get(yearWithSemester) + ", " + rate;
 						finalLines.add(finalLine);
@@ -157,7 +157,7 @@ public class HGUCoursePatternAnalyzer {
 		String sentence, fixedLine;
 		int TotalNumberOfSemestersRegistered, NumCoursesTakenInTheSemester, totalSemester;
 
-		sentence = "StudentID, TotalNumberOfSemestersRegistered, Semester, NumCoursesTakenInTheSemester";
+		sentence = "StudentID,TotalNumberOfSemestersRegistered,Semester,NumCoursesTakenInTheSemester";
 		result.add(sentence);
 		for (String Id : sortedStudents.keySet()) {
 			totalSemester = sortedStudents.get(Id).getSemestersByYearAndSemester().values().size();
