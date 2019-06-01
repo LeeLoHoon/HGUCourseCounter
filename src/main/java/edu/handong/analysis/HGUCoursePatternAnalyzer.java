@@ -137,12 +137,10 @@ public class HGUCoursePatternAnalyzer {
 		HashMap<String, Student> makeStudents = new HashMap<String, Student>();
 
 		for (String[] line : lines) {
-
 			if (makeStudents.containsKey(line[0])) {
 				Course newCourse = new Course(line);
 				makeStudents.get(line[0]).addCourse(newCourse);
 				makeStudents.get(line[0]).getSemestersByYearAndSemester();
-
 			} else {
 				Student newStudent = new Student(line[0]);
 				Course newCourse = new Course(line);
@@ -172,9 +170,7 @@ public class HGUCoursePatternAnalyzer {
 						+ String.valueOf(semester) + ", " + String.valueOf(NumCoursesTakenInTheSemester);
 				result.add(fixedLine);
 			}
-
 		}
-
 		return result;
 	}
 
@@ -191,7 +187,7 @@ public class HGUCoursePatternAnalyzer {
 			if (analysisOption == 2) {
 				courseCode = cmd.getOptionValue("c");
 			}
-
+			
 			startYear = Integer.parseInt(cmd.getOptionValue("s"));
 			endYear = Integer.parseInt(cmd.getOptionValue("e"));
 			help = cmd.hasOption("h");
