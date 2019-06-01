@@ -85,8 +85,6 @@ public class HGUCoursePatternAnalyzer {
 	private HashMap<String, ArrayList<String>> countAllStudents(ArrayList<String[]> checkLines) {
 		HashMap<String, ArrayList<String>> numberOfStudents = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> studentName = new ArrayList<String>();
-		boolean check;
-		int count = 1;
 		for (String[] line : checkLines) {
 			String year = line[7];
 			String semester = line[8];
