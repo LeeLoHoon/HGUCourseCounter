@@ -60,7 +60,7 @@ public class HGUCoursePatternAnalyzer {
 						float entire = studentNumByYearToSemester.get(yearWithSemester).size();
 						float select = sortedChoiceStudentNumByYearToSemester.get(yearWithSemester);
 						float rate = Math.round(((select / entire) * 1000)) / 10F;
-						String finalLine = year + ", " + semester + ", " + courseName + ", " + courseCode + ", "
+						String finalLine = year + ", " + semester + ", " +courseCode + ", " +courseName + ", " 
 								+ studentNumByYearToSemester.get(yearWithSemester).size() + ", "
 								+ sortedChoiceStudentNumByYearToSemester.get(yearWithSemester) + ", " + rate;
 						finalLines.add(finalLine);
