@@ -20,7 +20,7 @@ public class HGUCoursePatternAnalyzer {
 	private HashMap<String, Student> students;
 	private String inputPath;
 	private String outputPath;
-	String courseCode;
+	private String courseCode;
 	private int analysisOption;
 	private int startYear;
 	private int endYear;
